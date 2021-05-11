@@ -76,6 +76,7 @@ class Themes {
       ),
     ),
   );
+
   final darkTheme = ThemeData.dark().copyWith(
     canvasColor: Colors.transparent,
     primaryColor: const Color(0xFF393D46),

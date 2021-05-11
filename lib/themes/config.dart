@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../main.dart';
-
 class App {
   late BuildContext _context;
   late double _height;

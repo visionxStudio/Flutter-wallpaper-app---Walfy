@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallpaperapp/themes/theme_service.dart';
 
 class Homepage extends StatelessWidget {
   @override
@@ -9,8 +10,10 @@ class Homepage extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: () {},
-          child: Text("Change the theme"),
+          onPressed: () {
+            ThemeService().changeThemeMode();
+          },
+          child: Text("Switch theme"),
         ),
       ),
     );
