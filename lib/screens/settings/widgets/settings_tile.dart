@@ -26,14 +26,6 @@ class _SettingsTileState extends State<SettingsTile>
     with SingleTickerProviderStateMixin {
   SettingsController settingsController =
       Get.put<SettingsController>(SettingsController());
-  AnimationController? _animationController;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +40,7 @@ class _SettingsTileState extends State<SettingsTile>
               Icon(
                 widget.icon,
                 color: Theme.of(context).unselectedWidgetColor,
-                size: 24,
+                size: 20,
               ),
               SizedBox(width: 30.0),
               Column(
@@ -80,7 +72,7 @@ class _SettingsTileState extends State<SettingsTile>
               Spacer(),
               widget.trail
                   ? Obx(() {
-                      if (settingsController.isExpanded.value) {
+                      if (settingsController.isDownloadExpanded.value) {
                         return Icon(Icons.keyboard_arrow_up_rounded);
                       } else {
                         return Icon(
@@ -97,20 +89,6 @@ class _SettingsTileState extends State<SettingsTile>
                         ),
                       ),
                     ),
-              // widget.trail
-              //     ? Icon(
-              //         Icons.keyboard_arrow_down_rounded,
-              //         color: Theme.of(context).unselectedWidgetColor,
-              //       )
-              //     : Opacity(
-              //         opacity: 0,
-              //         child: IconButton(
-              //           onPressed: () {},
-              //           icon: Icon(
-              //             Icons.keyboard_arrow_down_rounded,
-              //           ),
-              //         ),
-              //       ),
             ],
           ),
         ),

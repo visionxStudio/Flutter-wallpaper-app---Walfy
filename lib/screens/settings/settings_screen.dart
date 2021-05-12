@@ -17,26 +17,26 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
+    // double _height = MediaQuery.of(context).size.height;
     return Container(
-      height: _height,
       child: Scaffold(
         body: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          primary: true,
           child: Column(
             children: [
-              buildTitle(context), // Title of the app with background color
-
+              buildTitle(context),
               SettingsTile(
                 leading: "Buy Premium",
                 subtitle: "Get Unlimited Setup & Filter",
                 trail: false,
                 icon: FontAwesomeIcons.crown,
               ),
-
               ConfigurableExpansionTile(
                 onExpansionChanged: (bool value) {
-                  settingsController.isExpanded.value = value;
+                  settingsController.isDownloadExpanded.value = value;
                 },
+                kExpand: Duration(milliseconds: 400),
                 header: Expanded(
                   child: SettingsTile(
                     leading: "Downloads",
@@ -69,26 +69,66 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ],
               ),
-
-              SettingsTile(
-                leading: "General",
-                subtitle: "Change app look & settings",
-                trail: true,
-                icon: FontAwesomeIcons.fileImage,
-              ),
-
               SettingsTile(
                 leading: "Sign in",
                 subtitle: "Sign in to sync data across devices",
                 trail: false,
                 icon: FontAwesomeIcons.signInAlt,
               ),
-
+              ConfigurableExpansionTile(
+                onExpansionChanged: (bool value) {
+                  settingsController.isDownloadExpanded.value = value;
+                },
+                kExpand: Duration(milliseconds: 400),
+                header: Expanded(
+                  child: SettingsTile(
+                    leading: "General",
+                    subtitle: "Change app look & settings",
+                    trail: true,
+                    icon: FontAwesomeIcons.fileImage,
+                  ),
+                ),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SettingsTile(
+                      leading: "Themes",
+                      subtitle: "Toggle app themes",
+                      trail: false,
+                      icon: FontAwesomeIcons.wrench,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SettingsTile(
+                      leading: "Clear Cache",
+                      subtitle: "Clear app cache",
+                      trail: false,
+                      icon: FontAwesomeIcons.redo,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SettingsTile(
+                      leading: "Restart App",
+                      subtitle: "Force the app to restart",
+                      trail: false,
+                      icon: FontAwesomeIcons.powerOff,
+                    ),
+                  ),
+                  Divider(
+                    thickness: 1.0,
+                  ),
+                ],
+              ),
               SettingsTile(
                 leading: "About us",
                 subtitle: "Github, Websites & more",
-                trail: true,
+                trail: false,
                 icon: FontAwesomeIcons.info,
+              ),
+              SizedBox(
+                height: 100.0,
               ),
             ],
           ),
