@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:wallpaperapp/screens/homepage/home_screen.dart';
+import 'package:wallpaperapp/screens/settings/settings_screen.dart';
 
 class Root extends StatefulWidget {
   @override
@@ -24,16 +26,14 @@ class _RootState extends State<Root> {
 
   bool showUnselectedLabels = false;
 
-  Gradient selectedGradient =
-      const LinearGradient(colors: [Colors.red, Colors.amber]);
-
-  Color? containerColor;
-
-  List<Color> containerColors = [
-    const Color(0xFFFDE1D7),
-    const Color(0xFFE4EDF5),
-    const Color(0xFFE7EEED),
-    const Color(0xFFF4E4CE),
+  List<Widget> getBody = [
+    HomeScreen(
+      title: "1",
+    ),
+    HomeScreen(
+      title: "2",
+    ),
+    SettingScreen()
   ];
 
   @override
@@ -42,25 +42,18 @@ class _RootState extends State<Root> {
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: true,
       extendBody: true,
-      body: Center(
-        child: Text(
-          "Welcome",
-          style: Theme.of(context).textTheme.headline1,
-        ),
-      ),
+      body: getBody[_selectedItemPosition],
       bottomNavigationBar: Container(
         width: MediaQuery.of(context).size.width * 0.5,
         child: SnakeNavigationBar.color(
-          shadowColor: Theme.of(context).secondaryHeaderColor.withOpacity(0.3),
           elevation: 6,
           behaviour: snakeBarStyle,
           snakeShape: snakeShape,
           shape: bottomBarShape,
           padding: padding,
-          snakeViewColor: Theme.of(context).secondaryHeaderColor,
-          selectedItemColor: snakeShape == SnakeShape.indicator
-              ? Theme.of(context).secondaryHeaderColor
-              : null,
+          // ignore: deprecated_member_use
+          snakeViewColor: Theme.of(context).accentColor,
+          selectedItemColor: Colors.white,
           unselectedItemColor: Theme.of(context).unselectedWidgetColor,
           showUnselectedLabels: showUnselectedLabels,
           showSelectedLabels: showSelectedLabels,

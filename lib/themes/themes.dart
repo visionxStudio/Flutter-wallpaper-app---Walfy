@@ -23,12 +23,12 @@ final themeCollection = ThemeCollection(
       scaffoldBackgroundColor: Colors.white,
       canvasColor: Colors.transparent,
       primaryColor: Colors.white,
-      // primaryColor: Color(0xffe57697),
       brightness: Brightness.light,
       errorColor: const Color(0xFFE57697),
-      // secondaryHeaderColor: config.Colors().accentColor(1),
+      // ignore: deprecated_member_use
+      accentColor: Color(0xFFE57697),
       secondaryHeaderColor: Color(0xffe57697),
-      unselectedWidgetColor: Colors.black87,
+      unselectedWidgetColor: Colors.black54,
       focusColor: config.Colors().mainColor(1),
       hintColor: config.Colors().secondColor(1),
       textTheme: TextTheme(
@@ -40,7 +40,7 @@ final themeCollection = ThemeCollection(
         ),
         headline5: TextStyle(
           fontSize: 16.0,
-          color: Colors.white.withOpacity(1),
+          color: Colors.black.withOpacity(1),
           fontFamily: "Proxima Nova",
         ),
         headline4: TextStyle(
@@ -68,25 +68,25 @@ final themeCollection = ThemeCollection(
         subtitle1: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w900,
-          color: config.Colors().secondColor(1),
+          color: Colors.black54,
           fontFamily: "Roboto",
         ),
         headline6: TextStyle(
           fontSize: 13.0,
-          color: Colors.white.withOpacity(.85),
+          color: Colors.black.withOpacity(.85),
           fontFamily: "Proxima Nova",
         ),
         bodyText2: TextStyle(
           fontFamily: 'Proxima Nova',
           fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: Colors.white.withOpacity(.75),
+          color: Colors.black.withOpacity(.75),
         ),
         bodyText1: TextStyle(
           fontFamily: 'Proxima Nova',
           fontSize: 24,
           fontWeight: FontWeight.w500,
-          color: Colors.white.withOpacity(1),
+          color: Colors.black.withOpacity(1),
         ),
         caption: TextStyle(
           fontFamily: 'Roboto',
@@ -98,10 +98,13 @@ final themeCollection = ThemeCollection(
     ),
     AppThemes.KDarkTheme: ThemeData(
       canvasColor: Colors.transparent,
-      primaryColor: config.Colors().mainDarkColor(1),
+      // primaryColor: Color(0xFF1F1F1F),
       brightness: Brightness.dark,
       errorColor: const Color(0xFFE57697),
-      secondaryHeaderColor: config.Colors().accentDarkColor(1),
+      // ignore: deprecated_member_use
+      accentColor: Color(0xFFE57697),
+      unselectedWidgetColor: Colors.white,
+      secondaryHeaderColor: Color(0xffe57697),
       focusColor: config.Colors().mainDarkColor(1),
       hintColor: config.Colors().secondDarkColor(1),
       textTheme: TextTheme(
