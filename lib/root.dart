@@ -26,15 +26,7 @@ class _RootState extends State<Root> {
 
   bool showUnselectedLabels = false;
 
-  List<Widget> getBody = [
-    HomeScreen(
-      title: "1",
-    ),
-    HomeScreen(
-      title: "2",
-    ),
-    SettingScreen()
-  ];
+  List<Widget> getBody = [HomeScreen(), HomeScreen(), SettingScreen()];
 
   @override
   Widget build(BuildContext context) {
