@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import './config.dart' as config;
 
 class AppThemes {
-  static const int KLightTheme = 0;
-  static const int KDarkTheme = 1;
+  static const int KLightTheme = 1;
+  static const int KDarkTheme = 0;
   static const int KLightTheme2 = 2;
   static const int KDarkTheme2 = 3;
   static const int KLightTheme3 = 4;

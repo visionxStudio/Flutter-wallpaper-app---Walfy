@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wallpaperapp/controller/pexel_image_controller.dart';
 import 'package:wallpaperapp/model/pexel_photo_model.dart';
+import 'package:wallpaperapp/screens/wallpaper/full_screen_wallpaper.dart';
 import 'package:wallpaperapp/services/pexels_remote_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -86,82 +87,42 @@ class _HomeScreenState extends State<HomeScreen>
             child: Column(
               children: [
                 SizedBox(height: 8.0),
-                CarouselSlider(
-                  items: <Widget>[
-                    Container(
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(16.0),
-                        )),
-                    Container(
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(16.0),
-                        )),
-                    Container(
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          color: Colors.yellow,
-                          borderRadius: BorderRadius.circular(16.0),
-                        )),
-                  ],
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    viewportFraction: 0.7,
-                    aspectRatio: 2.0,
-                    initialPage: 2,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: AnimationLimiter(
-                    child: Obx(() {
-                      return GridView.builder(
-                        itemCount: pexelsImageController.imageList.length,
-                        shrinkWrap: true,
-                        primary: false,
-                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200,
-                          childAspectRatio: 3 / 4.5,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
-                        ),
-                        itemBuilder: (BuildContext context, int index) {
-                          PexelPhotosModel pexelPhotosModel =
-                              pexelsImageController.imageList[index];
-                          return AnimationConfiguration.staggeredGrid(
-                            position: index,
-                            columnCount: pexelsImageController.imageList.length,
-                            child: ScaleAnimation(
-                              child: FadeInAnimation(
-                                child: CachedNetworkImage(
-                                  imageUrl: pexelPhotosModel.src.portrait,
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  placeholder: (context, url) => Center(
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }),
-                  ),
-                ),
+                // CarouselSlider(
+                //   items: <Widget>[
+                //     Container(
+                //         decoration: BoxDecoration(
+                //       image: DecorationImage(
+                //           fit: BoxFit.cover,
+                //           image: NetworkImage(
+                //               "https://images.pexels.com/photos/545008/pexels-photo-545008.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500")),
+                //       borderRadius: BorderRadius.circular(30.0),
+                //     )),
+                //     Container(
+                //         decoration: BoxDecoration(
+                //       image: DecorationImage(
+                //           fit: BoxFit.cover,
+                //           image: NetworkImage(
+                //               "https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500")),
+                //       borderRadius: BorderRadius.circular(30.0),
+                //     )),
+                //     Container(
+                //         decoration: BoxDecoration(
+                //       image: DecorationImage(
+                //           fit: BoxFit.cover,
+                //           image: NetworkImage(
+                //               "https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500")),
+                //       borderRadius: BorderRadius.circular(30.0),
+                //     )),
+                //   ],
+                //   options: CarouselOptions(
+                //     autoPlay: true,
+                //     enlargeCenterPage: true,
+                //     viewportFraction: 0.8,
+                //     aspectRatio: 2.0,
+                //     initialPage: 2,
+                //   ),
+                // ),
+                PexelsWallpaper(pexelsImageController: pexelsImageController),
               ],
             ),
           ),
@@ -172,6 +133,70 @@ class _HomeScreenState extends State<HomeScreen>
             child: Text("2"),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class PexelsWallpaper extends StatelessWidget {
+  const PexelsWallpaper({
+    Key key,
+    @required this.pexelsImageController,
+  }) : super(key: key);
+
+  final PexelsImageController pexelsImageController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AnimationLimiter(
+        child: Obx(() {
+          return GridView.builder(
+            itemCount: pexelsImageController.imageList.length,
+            shrinkWrap: true,
+            primary: false,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 3 / 4.5,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              PexelPhotosModel pexelPhotosModel =
+                  pexelsImageController.imageList[index];
+              return AnimationConfiguration.staggeredGrid(
+                position: index,
+                columnCount: pexelsImageController.imageList.length,
+                child: ScaleAnimation(
+                  child: FadeInAnimation(
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => FullScreenWallpaper(
+                            imageUrl: pexelPhotosModel.src.large));
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl: pexelPhotosModel.src.portrait,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        }),
       ),
     );
   }
