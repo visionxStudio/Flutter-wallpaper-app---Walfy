@@ -27,14 +27,17 @@ class SrcModel {
   String large;
   String landscape;
   String medium;
+  String original;
 
-  SrcModel({this.portrait, this.landscape, this.large, this.medium});
+  SrcModel(
+      {this.portrait, this.landscape, this.large, this.medium, this.original});
 
   factory SrcModel.fromMap(Map<String, dynamic> srcJson) {
     return SrcModel(
         portrait: srcJson["portrait"],
         large: srcJson["large"],
         landscape: srcJson["landscape"],
-        medium: srcJson["medium"]);
+        medium: srcJson["medium"],
+        original: srcJson["original"]);
   }
 }

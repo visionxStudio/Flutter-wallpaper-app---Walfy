@@ -11,7 +11,9 @@ class PexelRemoteService {
   static Future<List<PexelPhotosModel>> getCurratedWallpaper() async {
     List<PexelPhotosModel> photos = [];
     final response = await http.get(
-        Uri.parse("https://api.pexels.com/v1/curated?per_page=30"),
+        // Uri.parse("https://api.pexels.com/v1/curated?per_page=30"),
+        Uri.parse(
+            "https://api.pexels.com/v1/search?query=nature&per_page=40&page=1"),
         headers: {"Authorization": apiKey});
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonData = jsonDecode(response.body);

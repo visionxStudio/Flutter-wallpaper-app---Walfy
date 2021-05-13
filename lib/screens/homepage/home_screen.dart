@@ -173,7 +173,7 @@ class PexelsWallpaper extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Get.to(() => FullScreenWallpaper(
-                            imageUrl: pexelPhotosModel.src.large));
+                            imageUrl: pexelPhotosModel.src.original));
                       },
                       child: CachedNetworkImage(
                         imageUrl: pexelPhotosModel.src.portrait,

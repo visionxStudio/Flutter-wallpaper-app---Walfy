@@ -211,7 +211,8 @@ class _FullScreenWallpaperState extends State<FullScreenWallpaper>
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
+              filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 8.0),
+              // filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 750),
                 decoration: BoxDecoration(
