@@ -6,11 +6,11 @@ import '../settings_controller.dart';
 
 class SettingsTile extends StatefulWidget {
   const SettingsTile({
-    Key? key,
-    required this.leading,
-    required this.subtitle,
-    required this.trail,
-    required this.icon,
+    Key key,
+    @required this.leading,
+    @required this.subtitle,
+    @required this.trail,
+    @required this.icon,
   }) : super(key: key);
 
   final String leading;
@@ -51,7 +51,7 @@ class _SettingsTileState extends State<SettingsTile>
                     style: GoogleFonts.montserrat(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w300,
-                      color: Theme.of(context).textTheme.headline6!.color,
+                      color: Theme.of(context).textTheme.headline6.color,
                     ),
                     overflow: TextOverflow.fade,
                     maxLines: 1,
@@ -62,7 +62,7 @@ class _SettingsTileState extends State<SettingsTile>
                     style: GoogleFonts.montserrat(
                       fontSize: 14.0,
                       fontWeight: FontWeight.w300,
-                      color: Theme.of(context).textTheme.subtitle1!.color,
+                      color: Theme.of(context).textTheme.subtitle1.color,
                     ),
                     overflow: TextOverflow.fade,
                     maxLines: 1,

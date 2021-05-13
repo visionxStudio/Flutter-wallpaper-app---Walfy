@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:wallpaperapp/model/pexel_photo_model.dart';
@@ -27,7 +28,7 @@ class PexelRemoteService {
   }
 
   static Future<List<PexelPhotosModel>> getCategorieWallpaper(
-      {required String category}) async {
+      {@required String category}) async {
     List<PexelPhotosModel> photos = [];
     final response = await http.get(
         Uri.parse(

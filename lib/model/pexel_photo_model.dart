@@ -1,9 +1,9 @@
 class PexelPhotosModel {
-  String? url;
-  String? photographer;
-  String? photographerUrl;
-  int? photographerId;
-  SrcModel? src;
+  String url;
+  String photographer;
+  String photographerUrl;
+  int photographerId;
+  SrcModel src;
 
   PexelPhotosModel(
       {this.url,
@@ -23,10 +23,10 @@ class PexelPhotosModel {
 }
 
 class SrcModel {
-  String? portrait;
-  String? large;
-  String? landscape;
-  String? medium;
+  String portrait;
+  String large;
+  String landscape;
+  String medium;
 
   SrcModel({this.portrait, this.landscape, this.large, this.medium});
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -7,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wallpaperapp/controller/pexel_image_controller.dart';
 import 'package:wallpaperapp/model/pexel_photo_model.dart';
 import 'package:wallpaperapp/services/pexels_remote_service.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -18,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen>
   final PexelsImageController pexelsImageController =
       Get.put(PexelsImageController());
 
-  late TabController _tabController;
+  TabController _tabController;
   final List<Tab> myTabs = <Tab>[
     Tab(
       icon: Icon(Icons.image),
@@ -54,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen>
           "Wallpaper App",
           style: GoogleFonts.montserrat(
             // ignore: deprecated_member_use
-            color: Theme.of(context).textTheme.headline1!.color,
+            color: Theme.of(context).textTheme.headline1.color,
             fontSize: 24.0,
           ),
         ),
@@ -135,16 +137,22 @@ class _HomeScreenState extends State<HomeScreen>
                             columnCount: pexelsImageController.imageList.length,
                             child: ScaleAnimation(
                               child: FadeInAnimation(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                        pexelPhotosModel.src!.portrait!,
+                                child: CachedNetworkImage(
+                                  imageUrl: pexelPhotosModel.src.portrait,
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),
+                                  placeholder: (context, url) => Center(
+                                      child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
                                 ),
                               ),
                             ),

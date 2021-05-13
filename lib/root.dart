@@ -9,7 +9,7 @@ class Root extends StatefulWidget {
 }
 
 class _RootState extends State<Root> {
-  ShapeBorder? bottomBarShape = const RoundedRectangleBorder(
+  ShapeBorder bottomBarShape = const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(25)),
   );
 
@@ -38,7 +38,8 @@ class _RootState extends State<Root> {
       bottomNavigationBar: Container(
         width: MediaQuery.of(context).size.width * 0.5,
         child: SnakeNavigationBar.color(
-          elevation: 6,
+          elevation: 15,
+          shadowColor: Colors.grey,
           behaviour: snakeBarStyle,
           snakeShape: snakeShape,
           shape: bottomBarShape,

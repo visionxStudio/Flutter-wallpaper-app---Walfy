@@ -1,5 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile.dart';
+import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -147,12 +147,11 @@ class _SettingScreenState extends State<SettingScreen> {
           child: TextLiquidFill(
             loadDuration: Duration(seconds: 2),
             waveDuration: Duration(seconds: 1),
-            text: 'WALLPAPPER ', // TODO Change the App name in here
+            text: 'WALLPAPER', // TODO Change the App name in here
             waveColor: Colors.white,
-            // ignore: deprecated_member_use
             boxBackgroundColor: Theme.of(context).accentColor,
             textStyle: TextStyle(
-              fontSize: Theme.of(context).textTheme.headline1!.fontSize,
+              fontSize: Theme.of(context).textTheme.headline1.fontSize,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),

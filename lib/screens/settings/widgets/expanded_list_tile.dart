@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 class ExpandedListTile {
   final String leading;
-  final List<ExpandedListTile>? children;
+  final List<ExpandedListTile> children;
 
-  ExpandedListTile({required this.leading, this.children});
+  ExpandedListTile({@required this.leading, this.children});
 }
 
 List<ExpandedListTile> listofTiles = <ExpandedListTile>[

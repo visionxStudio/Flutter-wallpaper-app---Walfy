@@ -13,7 +13,7 @@ class PexelsImageController extends GetxController {
 
   void fetchPexelImages() async {
     await PexelRemoteService.getCurratedWallpaper().then((pexelImages) {
-      imageList.value = pexelImages;
+      imageList.assignAll(pexelImages);
     });
   }
 }
