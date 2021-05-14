@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,7 +8,6 @@ import 'package:wallpaperapp/controller/pexel_image_controller.dart';
 import 'package:wallpaperapp/model/pexel_photo_model.dart';
 import 'package:wallpaperapp/screens/wallpaper/full_screen_wallpaper.dart';
 import 'package:wallpaperapp/services/pexels_remote_service.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
