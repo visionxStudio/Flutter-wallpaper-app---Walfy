@@ -1,16 +1,16 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
+import 'package:wallpaperapp/core/menuButtons/set_wallpaper.dart';
 import 'clockOverlay.dart';
 import 'collapsed_panel.dart';
 import 'colorBar.dart';
@@ -258,6 +258,20 @@ class _FullScreenWallpaperState extends State<FullScreenWallpaper>
                         ],
                       ),
                     ),
+                    Expanded(
+                      flex: 5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SetWallpaperButton(
+                            colorChanged: colorChanged,
+                            url: screenshotTaken
+                                ? _imageFile.path
+                                : widget.imageUrl,
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -375,12 +389,13 @@ class _FullScreenWallpaperState extends State<FullScreenWallpaper>
                               animation = Tween(begin: 0.0, end: 1.0)
                                   .animate(animation);
                               return FadeTransition(
-                                  opacity: animation,
-                                  child: ClockOverlay(
-                                    colorChanged: colorChanged,
-                                    accent: accent,
-                                    file: false,
-                                  ));
+                                opacity: animation,
+                                child: ClockOverlay(
+                                  colorChanged: colorChanged,
+                                  accent: accent,
+                                  file: false,
+                                ),
+                              );
                             },
                             fullscreenDialog: true,
                             opaque: false));
@@ -390,8 +405,9 @@ class _FullScreenWallpaperState extends State<FullScreenWallpaper>
                       : accent.computeLuminance() > 0.5
                           ? Colors.black
                           : Colors.white,
-                  icon: const Icon(
-                    Icons.settings_power_sharp,
+                  icon: Icon(
+                    FontAwesomeIcons.eye,
+                    size: 18.0,
                   ),
                 ),
               ),

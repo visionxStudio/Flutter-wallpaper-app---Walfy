@@ -1,4 +1,4 @@
-package com.example.wallpaperapp
+package com.visionxstudio.wallpaperapp
 
 import io.flutter.embedding.android.FlutterActivity
 
