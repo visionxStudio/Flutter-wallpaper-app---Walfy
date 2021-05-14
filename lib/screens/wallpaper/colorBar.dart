@@ -28,8 +28,6 @@ class ColorBar extends StatelessWidget {
                       .replaceAll("Color(0xff", "")
                       .replaceAll(")", ""),
                 )).then((result) {
-                  // toasts.color(colors[color]);
-                  // Fluttertoast.showToast(msg: colors[color]);
                   Fluttertoast.showToast(msg: "ColorBar toast print line 35");
                 });
               },

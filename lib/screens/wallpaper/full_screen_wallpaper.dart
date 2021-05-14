@@ -6,10 +6,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import 'clockOverlay.dart';
 import 'collapsed_panel.dart';
 import 'colorBar.dart';
 
@@ -25,12 +27,6 @@ class FullScreenWallpaper extends StatefulWidget {
 
 class _FullScreenWallpaperState extends State<FullScreenWallpaper>
     with SingleTickerProviderStateMixin {
-  //     Future<bool> onWillPop() async {
-  //   if (navStack.length > 1) navStack.removeLast();
-  //   debugPrint(navStack.toString());
-  //   return true;
-  // }
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   AnimationController shakeController;
@@ -48,6 +44,7 @@ class _FullScreenWallpaperState extends State<FullScreenWallpaper>
   Future<String> _futureView;
   int firstTime = 0;
 
+  // paletteGenerator for background
   Future<void> _updatePaletteGenerator() async {
     setState(() {
       isLoading = true;
@@ -211,7 +208,7 @@ class _FullScreenWallpaperState extends State<FullScreenWallpaper>
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 8.0),
+              filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
               // filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 750),
@@ -341,6 +338,63 @@ class _FullScreenWallpaperState extends State<FullScreenWallpaper>
                   ),
                 );
               },
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8.0, 32, 8, 8),
+                child: IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  color: isLoading
+                      ? Theme.of(context).accentColor
+                      : accent.computeLuminance() > 0.5
+                          ? Colors.black
+                          : Colors.white,
+                  icon: const Icon(
+                    Icons.chevron_left,
+                  ),
+                ),
+              ),
+            ),
+            // Building Clock overlay and icons overlay
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8.0, 32, 8, 8),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            transitionDuration:
+                                const Duration(milliseconds: 300),
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) {
+                              animation = Tween(begin: 0.0, end: 1.0)
+                                  .animate(animation);
+                              return FadeTransition(
+                                  opacity: animation,
+                                  child: ClockOverlay(
+                                    colorChanged: colorChanged,
+                                    accent: accent,
+                                    file: false,
+                                  ));
+                            },
+                            fullscreenDialog: true,
+                            opaque: false));
+                  },
+                  color: isLoading
+                      ? Theme.of(context).accentColor
+                      : accent.computeLuminance() > 0.5
+                          ? Colors.black
+                          : Colors.white,
+                  icon: const Icon(
+                    Icons.settings_power_sharp,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
